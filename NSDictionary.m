@@ -1519,3 +1519,42 @@ static NSString *_getDescription(id obj, id locale, int level)
 }
 
 @end
+
+#include <stdio.h>
+
+// These are just global symbol declarations
+extern void *__NSDictionary0__;
+void *__NSDictionary0__struct = 0;
+
+static int verbose = 0;
+
+// Called automatically when the dylib is loaded
+__attribute__((constructor))
+static void _init_dict0_struct(void) {
+    __NSDictionary0__struct = __NSDictionary0__;
+
+    verbose = getenv("STUB_VERBOSE") != NULL;
+
+    if (verbose) fprintf(stderr, "CoreFoundation dylib loaded\n");
+}
+@implementation NSConstantDictionary
+
+- (NSUInteger)count
+{
+    fprintf(stderr, "Stub: NSConstantDictionary.count\n");
+    return 0;
+}
+
+- (id)objectForKey:(id)aKey
+{
+    fprintf(stderr, "Stub: NSConstantDictionary.aKey\n");
+    return nil;
+}
+
+- (NSEnumerator*)keyEnumerator
+{
+    fprintf(stderr, "Stub: NSConstantDictionary.keyEnumerator\n");
+    return nil;
+}
+
+@end
